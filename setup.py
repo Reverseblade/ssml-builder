@@ -8,11 +8,11 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='ssml_builder',
-    version='1.0.2',
+    version='1.0.8',
     packages=['ssml_builder'],
     url='https://github.com/Reverseblade/ssml-builder',
     license='Free',
     author='Yuta Fujisawa',
     author_email='',
-    description='SSML Builder for Alexa'
+    description='SSML Builder for Alexa Skill Development in Python'
 )

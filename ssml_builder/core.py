@@ -8,14 +8,14 @@ class Speech:
 
     def speak(self):
         """
-        <speak>タグで囲う
+        <speak>
         :return:
         """
         return '<speak>{}</speak>'.format(self.speech)
 
     def say(self, value):
         """
-        テキストの追加
+        add text
         :return:
         """
         self.speech += value
@@ -23,7 +23,7 @@ class Speech:
 
     def say_as(self, value, interpret_as):
         """
-        <say_as>タグで囲う
+        <say_as>
         :param value:
         :param interpret_as:
         :return:
@@ -33,7 +33,7 @@ class Speech:
 
     def prosody(self, value, rate):
         """
-        <prosody>タグで囲う
+        <prosody>
         :param value:
         :param rate:
         :return:
@@ -41,9 +41,9 @@ class Speech:
         self.speech += '<prosody rate="{}">{}</prosody>'.format(rate, value)
         return self
 
-    def sub(self, alias, value):
+    def sub(self, value, alias):
         """
-        <sub>タグで囲う
+        <sub>
         :param alias:
         :param value:
         :self.speech +=:
@@ -51,9 +51,29 @@ class Speech:
         self.speech += '<sub alias="{}">{}</sub>'.format(alias, value)
         return self
 
+    def lang(self, value, lang):
+        """
+        <lang>
+        :param value:
+        :param lang:
+        :return:
+        """
+        self.speech += '<lang xml:lang="{}"/>{}</lang>'.format(lang, value)
+        return self
+
+    def voice(self, value, name):
+        """
+        <voice>
+        :param value:
+        :param name:
+        :return:
+        """
+        self.speech += '<voice name="{}"/>{}</voice>'.format(name, value)
+        return self
+
     def pause(self, time):
         """
-        <break>タグを生成
+        <break>
         :param time:
         :return:
         """
