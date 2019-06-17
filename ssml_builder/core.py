@@ -1,6 +1,68 @@
 # -*- coding: utf-8 -*-
 
 
+class SSML:
+
+    @staticmethod
+    def say_as(value, interpret_as):
+        """
+        <say_as>
+        :param value:
+        :param interpret_as:
+        :return:
+        """
+        return '<say-as interpret-as="{}">{}</say-as>'.format(interpret_as, value)
+
+    @staticmethod
+    def prosody(value, rate):
+        """
+        <prosody>
+        :param value:
+        :param rate:
+        :return:
+        """
+        return '<prosody rate="{}">{}</prosody>'.format(rate, value)
+
+    @staticmethod
+    def sub(value, alias):
+        """
+        <sub>
+        :param alias:
+        :param value:
+        :self.speech +=:
+        """
+        return '<sub alias="{}">{}</sub>'.format(alias, value)
+
+    @staticmethod
+    def lang(value, lang):
+        """
+        <lang>
+        :param value:
+        :param lang:
+        :param option:
+        :return:
+        """
+        return '<lang xml:lang="{}"/>{}</lang>'.format(lang, value)
+
+    @staticmethod
+    def voice(value, name):
+        """
+        <voice>
+        :param value:
+        :param name:
+        :return:
+        """
+        return '<voice name="{}"/>{}</voice>'.format(name, value)
+
+    @staticmethod
+    def pause(time):
+        """
+        <break>
+        :param time:
+        :return:
+        """
+        return '<break time="{}"/>'.format(time)
+
 class Speech:
 
     def __init__(self):
@@ -51,15 +113,19 @@ class Speech:
         self.speech += '<sub alias="{}">{}</sub>'.format(alias, value)
         return self
 
-    def lang(self, value, lang):
-        """
-        <lang>
-        :param value:
-        :param lang:
-        :return:
-        """
-        self.speech += '<lang xml:lang="{}"/>{}</lang>'.format(lang, value)
-        return self
+    # def lang(self, value, lang, option='default'):
+    #     """
+    #     <lang>
+    #     :param value:
+    #     :param lang:
+    #     :param option:
+    #     :return:
+    #     """
+    #
+    #     if option is '':
+    #     else:
+    #         self.speech += '<lang xml:lang="{}"/>{}</lang>'.format(lang, value)
+    #     return self
 
     def voice(self, value, name):
         """
@@ -79,3 +145,5 @@ class Speech:
         """
         self.speech += '<break time="{}"/>'.format(time)
         return self
+
+
