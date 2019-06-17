@@ -14,14 +14,17 @@ class SSML:
         return '<say-as interpret-as="{}">{}</say-as>'.format(interpret_as, value)
 
     @staticmethod
-    def prosody(value, rate):
+    def prosody(value, rate='medium', pitch='medium', volume='medium'):
         """
         <prosody>
         :param value:
         :param rate:
+        :param pitch:
+        :param volume:
         :return:
         """
-        return '<prosody rate="{}">{}</prosody>'.format(rate, value)
+        return '<prosody rate="{rate}" pitch="{pitch}" volume="{volume}">{value}' \
+               '</prosody>'.format(rate=rate, pitch=pitch, volume=volume, value=value)
 
     @staticmethod
     def sub(value, alias):
@@ -29,7 +32,6 @@ class SSML:
         <sub>
         :param alias:
         :param value:
-        :self.speech +=:
         """
         return '<sub alias="{}">{}</sub>'.format(alias, value)
 
@@ -42,7 +44,7 @@ class SSML:
         :param option:
         :return:
         """
-        return '<lang xml:lang="{}"/>{}</lang>'.format(lang, value)
+        return '<lang xml:lang="{}">{}</lang>'.format(lang, value)
 
     @staticmethod
     def voice(value, name):
@@ -52,7 +54,7 @@ class SSML:
         :param name:
         :return:
         """
-        return '<voice name="{}"/>{}</voice>'.format(name, value)
+        return '<voice name="{}">{}</voice>'.format(name, value)
 
     @staticmethod
     def pause(time):
@@ -62,6 +64,7 @@ class SSML:
         :return:
         """
         return '<break time="{}"/>'.format(time)
+
 
 class Speech:
 
@@ -93,14 +96,17 @@ class Speech:
         self.speech += '<say-as interpret-as="{}">{}</say-as>'.format(interpret_as, value)
         return self
 
-    def prosody(self, value, rate):
+    def prosody(self, value, rate='medium', pitch='medium', volume='medium'):
         """
         <prosody>
         :param value:
         :param rate:
+        :param pitch:
+        :param volume:
         :return:
         """
-        self.speech += '<prosody rate="{}">{}</prosody>'.format(rate, value)
+        self.speech += '<prosody rate="{rate}" pitch="{pitch}" volume="{volume}">' \
+                       '{value}</prosody>'.format(rate=rate, pitch=pitch, volume=volume, value=value)
         return self
 
     def sub(self, value, alias):
@@ -113,19 +119,17 @@ class Speech:
         self.speech += '<sub alias="{}">{}</sub>'.format(alias, value)
         return self
 
-    # def lang(self, value, lang, option='default'):
-    #     """
-    #     <lang>
-    #     :param value:
-    #     :param lang:
-    #     :param option:
-    #     :return:
-    #     """
-    #
-    #     if option is '':
-    #     else:
-    #         self.speech += '<lang xml:lang="{}"/>{}</lang>'.format(lang, value)
-    #     return self
+    def lang(self, value, lang):
+        """
+        <lang>
+        :param value:
+        :param lang:
+        :param option:
+        :return:
+        """
+
+        self.speech += '<lang xml:lang="{}">{}</lang>'.format(lang, value)
+        return self
 
     def voice(self, value, name):
         """
@@ -134,7 +138,7 @@ class Speech:
         :param name:
         :return:
         """
-        self.speech += '<voice name="{}"/>{}</voice>'.format(name, value)
+        self.speech += '<voice name="{}">{}</voice>'.format(name, value)
         return self
 
     def pause(self, time):
