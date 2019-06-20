@@ -36,8 +36,8 @@ class TestSpeech(unittest.TestCase):
         ssml = speech.prosody(value="slow x-high", rate='slow', pitch='x-high', is_nested=True)
         self.assertEqual(ssml, '<prosody rate="slow" pitch="x-high" volume="medium">slow x-high</prosody>')
 
-        ssml = speech.prosody(value="70% low x-soft", rate='70%', pitch='low', volume='x-soft', is_nested=True)
-        self.assertEqual(ssml, '<prosody rate="70%" pitch="low" volume="x-soft">70% low x-soft</prosody>')
+        ssml = speech.prosody(value="70% low x-soft", rate='70%', pitch='+50%', volume='x-soft', is_nested=True)
+        self.assertEqual(ssml, '<prosody rate="70%" pitch="+50%" volume="x-soft">70% low x-soft</prosody>')
 
     def test_sub(self):
         speech = Speech()

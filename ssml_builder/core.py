@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import re
+
 
 class Speech:
 
@@ -69,10 +71,12 @@ class Speech:
         """
 
         if rate not in self.VALID_PROSODY_ATTRIBUTES['rate']:
-            raise ValueError('The rate provided to prosody is not valid')
+            if re.match(r'^\d+%$', rate) is None:
+                raise ValueError('The rate provided to prosody is not valid')
 
         if pitch not in self.VALID_PROSODY_ATTRIBUTES['pitch']:
-            raise ValueError('The pitch provided to prosody is not valid')
+            if re.match(r'^(\+|\-)+\d+(\.\d+)*%$', pitch) is None:
+                raise ValueError('The pitch provided to prosody is not valid')
 
         if volume not in self.VALID_PROSODY_ATTRIBUTES['volume']:
             raise ValueError('The volume provided to prosody is not valid')
