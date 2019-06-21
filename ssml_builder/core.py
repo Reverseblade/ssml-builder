@@ -15,10 +15,12 @@ class Speech:
         'volume': ('silent', 'x-soft', 'soft', 'medium', 'loud', 'x-loud')
     }
 
-    VALID_VOICE_NAME = ('Ivy', 'Joanna', 'Joey', 'Justin', 'Kendra', 'Kimberly',
+    VALID_VOICE_NAMES = ('Ivy', 'Joanna', 'Joey', 'Justin', 'Kendra', 'Kimberly',
                         'Matthew', 'Salli', 'Nicole', 'Russell', 'Amy', 'Brian', 'Emma',
                         'Aditi', 'Raveena', 'Hans', 'Marlene', 'Vicki', 'Conchita', 'Enrique',
                         'Carla', 'Giorgio', 'Mizuki', 'Takumi', 'Celine', 'Lea', 'Mathieu')
+
+    VALID_EMPHASIS_LEVELS = ('strong', 'moderate', 'reduced')
 
     def __init__(self):
         self.speech = ""
@@ -132,7 +134,7 @@ class Speech:
         :return:
         """
 
-        if name not in self.VALID_VOICE_NAME:
+        if name not in self.VALID_VOICE_NAMES:
             raise ValueError('The name provided to voice is not valid')
 
         ssml = '<voice name="{}">{}</voice>'.format(name, value)
@@ -152,6 +154,63 @@ class Speech:
         """
 
         ssml = '<break time="{}"/>'.format(time)
+
+        if is_nested:
+            return ssml
+
+        self.speech += ssml
+        return self
+
+    def whisper(self, value, is_nested=False):
+        """
+        :param value:
+        :param is_nested:
+        :return:
+        """
+
+        ssml = '<amazon:effect name="whispered">{}</amazon:effect>'.format(value)
+
+        if is_nested:
+            return ssml
+
+        self.speech += ssml
+        return self
+
+    def audio(self, src, is_nested=False):
+        """
+        :param src:
+        :param is_nested:
+        :return:
+        """
+
+        ssml = '<audio src="{}" />'.format(src)
+
+        if is_nested:
+            return ssml
+
+        self.speech += ssml
+        return self
+
+    def emphasis(self, value, level, is_nested=False):
+
+        if level not in self.VALID_EMPHASIS_LEVELS:
+            raise ValueError('The level provided to emphasis is not valid')
+
+        ssml = '<emphasis level="strong">{}</emphasis>'.format(value)
+
+        if is_nested:
+            return ssml
+
+        self.speech += ssml
+        return self
+
+    def p(self, value,is_nested=False):
+        """
+        :param value:
+        :param is_nested:
+        :return:
+        """
+        ssml = '<p>{}</p>'.format(value)
 
         if is_nested:
             return ssml
