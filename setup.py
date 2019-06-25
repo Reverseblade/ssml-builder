@@ -8,7 +8,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='ssml_builder',
-    version='1.1.0',
+    version='1.1.1',
     packages=['ssml_builder'],
     url='https://github.com/Reverseblade/ssml-builder',
     long_description=long_description,

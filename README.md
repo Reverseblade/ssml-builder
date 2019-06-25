@@ -51,49 +51,51 @@ speech.speak()
 speech = Speech()
 speech.prosody(value="sample sentence", rate='70%', pitch='+50%', volume='x-soft')
 speech.speak()
-# <prosody rate="70%" pitch="+50%" volume="x-soft">sample sentence</prosody
+# <speak><prosody rate="70%" pitch="+50%" volume="x-soft">sample sentence</prosody></speak>
 ```
 #### sub
 ```buildoutcfg
 speech = Speech()
 speech.sub(value="Al", alias="aluminum")
 speech.speak()
-# <sub alias="aluminum">Al</sub>
+# <speak><sub alias="aluminum">Al</sub></speak>
 ```
 #### lang
 ```buildoutcfg
 speech = Speech()
 speech.lang(value="Paris", lang="fr-FR")
 speech.speak()
-# <lang xml:lang="fr-FR">Paris</lang>
+# <speak><speak><lang xml:lang="fr-FR">Paris</lang></speak>
 ```
 #### voice
 ```buildoutcfg
 speech = Speech()
 speech.voice(value="I am not a real human.", name="Kendra")
 speech.speak()
-# <voice name="Kendra">I am not a real human.</voice>
+# <speak><voice name="Kendra">I am not a real human.</voice></speak>
 ```
 #### pause
 ```buildoutcfg
 speech = Speech()
-speech.pause(time="3s", is_nested=True)
+speech.add_text("There is a three second pause here ")
+speech.pause(time="3s")
+speech.add_text("then the speech continues.")
 speech.speak()
-# <break time="3s"/>
+# <speak>There is a three second pause here <break time="3s"/>then the speech continues.</speak>
 ```
 #### whisper
 ```buildoutcfg
 speech = Speech()
 speech.whisper("I am not a real human.")
 speech.speak()
-# <amazon:effect name="whispered">I am not a real human.</amazon:effect>
+# <speak><amazon:effect name="whispered">I am not a real human.</amazon:effect></speak>
 ```
 #### audio
 ```buildoutcfg
 speech = Speech()
 speech.audio('soundbank://soundlibrary/transportation/amzn_sfx_car_accelerate_01')
 speech.speak()
-# <audio src="soundbank://soundlibrary/transportation/amzn_sfx_car_accelerate_01" />
+# <speak><audio src="soundbank://soundlibrary/transportation/amzn_sfx_car_accelerate_01" /></speak>
 ```
 #### emphasis
 ```buildoutcfg

@@ -66,6 +66,12 @@ class TestSpeech(unittest.TestCase):
         ssml = speech.pause(time="3s", is_nested=True)
         self.assertEqual(ssml, '<break time="3s"/>')
 
+        speech.add_text("There is a three second pause here ")
+        speech.pause(time="3s")
+        speech.add_text("then the speech continues.")
+        self.assertEqual(speech.speak(), '<speak>There is a three second pause here <break time="3s"/>'
+                                         'then the speech continues.</speak>')
+
     def test_whisper(self):
         speech = Speech()
 
